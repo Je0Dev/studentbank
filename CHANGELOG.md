@@ -19,3 +19,9 @@ this project adheres to [Semantic Versioning](https://semver.org/).
 - Audit logging to `student_bank.log`.
 - ctest suite covering validation, students, accounts, transactions, access.
 - Repository docs: CONSTRAINTS.md, CONTRIBUTING.md, AGENTS.md, PLAN.md.
+
+### Fixed
+
+- Stack switcher tabs were invisible because pages were added with
+  `gtk_stack_add_named` (no title), which hides the switcher buttons; switched
+  to `gtk_stack_add_titled`.

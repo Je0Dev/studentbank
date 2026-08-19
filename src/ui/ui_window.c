@@ -63,9 +63,12 @@ GtkWidget *ui_window_new(GtkApplication *app) {
     gtk_stack_switcher_set_stack(GTK_STACK_SWITCHER(switcher), GTK_STACK(stack));
     gtk_header_bar_pack_start(GTK_HEADER_BAR(header), switcher);
 
-    gtk_stack_add_named(GTK_STACK(stack), ui_dashboard_new(), "Dashboard");
-    gtk_stack_add_named(GTK_STACK(stack), ui_students_new(), "Students");
-    gtk_stack_add_named(GTK_STACK(stack), ui_accounts_new(), "Accounts");
+    gtk_stack_add_titled(GTK_STACK(stack), ui_dashboard_new(), "dashboard",
+                         "Dashboard");
+    gtk_stack_add_titled(GTK_STACK(stack), ui_students_new(), "students",
+                         "Students");
+    gtk_stack_add_titled(GTK_STACK(stack), ui_accounts_new(), "accounts",
+                         "Accounts");
 
     gtk_window_set_child(GTK_WINDOW(window), stack);
     ui_refresh_all();
