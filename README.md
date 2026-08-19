@@ -98,7 +98,8 @@ Student AM format: `1[1-3][001-999]` (second digit is the department code).
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the git workflow and
 [CONSTRAINTS.md](CONSTRAINTS.md) for code rules. The roadmap lives in
-[PLAN.md](PLAN.md).
+[PLAN.md](PLAN.md). For the GUI layer, consult the
+[GTK4 documentation](https://www.gtk.org/docs/).
 
 ## License
 

@@ -75,3 +75,5 @@ These rules apply to every commit in this repository. Reviews must enforce them.
 - `snake_case` for functions and variables, `UPPER_SNAKE` for constants,
   `GTK`/`g_*` names come from GTK4 itself.
 - Order helpers top-down: static helpers above the public functions that use them.
+- When unsure about a GTK4 widget or API, check the
+  [official GTK4 documentation](https://www.gtk.org/docs/) first.

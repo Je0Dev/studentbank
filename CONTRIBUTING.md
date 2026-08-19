@@ -113,3 +113,8 @@ important features, TODO left).
 Note: tests are for **really important features** (validation, transactions,
 access control), not for everything implemented. Small glue helpers and UI
 wrappers need no tests.
+
+## References
+
+- [GTK4 documentation](https://www.gtk.org/docs/) — API reference, widgets,
+  and migration guides for the GUI layer.

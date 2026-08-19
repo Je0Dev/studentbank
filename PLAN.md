@@ -17,6 +17,7 @@ types are tied to their profile — **Department**, **Erasmus**, or
 - Commit each feature on its own, then move on. No commits to `main` unless
   the user explicitly says "merge".
 - See [CONSTRAINTS.md](CONSTRAINTS.md) and [CONTRIBUTING.md](CONTRIBUTING.md).
+- General GTK4 reference: <https://www.gtk.org/docs/>.
 
 ## Prerequisite
 
@@ -104,52 +105,52 @@ New fused behavior: account **type** is derived from the student profile
 ## Implementation order
 
 ### 1. Scaffold (docs + build first)
-- [ ] Write `CMakeLists.txt`: C99, `-Wall -Wextra`, gtk4 via pkg-config;
+- [x] Write `CMakeLists.txt`: C99, `-Wall -Wextra`, gtk4 via pkg-config;
       `student_bank` executable; `test_student_bank` target compiling only
       `src/core/*.c` + `src/persistence/*.c` (no GTK); `enable_testing()`.
-- [ ] Write `include/constants.h` and the remaining headers.
-- [ ] Write `CONSTRAINTS.md`, `CONTRIBUTING.md`, `LICENSE` (adapted from
+- [x] Write `include/constants.h` and the remaining headers.
+- [x] Write `CONSTRAINTS.md`, `CONTRIBUTING.md`, `LICENSE` (adapted from
       bananakong + freshiki), plus `README.md`, `CHANGELOG.md`, `AGENTS.md`.
-- [ ] `tests/test_util.h` + `tests/test_main.c` harness (copy pattern).
+- [x] `tests/test_util.h` + `tests/test_main.c` harness (copy pattern).
 
 ### 2. Core modules, test-first
-- [ ] `validation.c`: `validate_am`, `validate_name`, `validate_pin`,
+- [x] `validation.c`: `validate_am`, `validate_name`, `validate_pin`,
       `format_name`, `sanitize_input` → `tests/test_validation.c`
-- [ ] `student.c`: create/find/delete/edit + duplicate AM check →
+- [x] `student.c`: create/find/delete/edit + duplicate AM check →
       `tests/test_student.c`
-- [ ] `account.c`: create/add/remove/find, unique number, max-accounts →
+- [x] `account.c`: create/add/remove/find, unique number, max-accounts →
       `tests/test_account.c`
-- [ ] `transaction.c`: deposit/withdraw/insufficient funds →
+- [x] `transaction.c`: deposit/withdraw/insufficient funds →
       `tests/test_transaction.c`
-- [ ] `auth.c`: admin + department credentials, access matrix →
+- [x] `auth.c`: admin + department credentials, access matrix →
       `tests/test_auth.c`
-- [ ] `search.c`: AM/name/department/partial search + sorted list
-- [ ] Every step: write test → see it fail → implement → `ctest` green.
+- [x] `search.c`: AM/name/department/partial search + sorted list
+- [x] Every step: write test → see it fail → implement → `ctest` green.
 
 ### 3. Persistence
-- [ ] `storage.c`: binary save/load of students + accounts
-- [ ] `backup.c`: timestamped backups, rotation to `MAX_BACKUPS`
-- [ ] `logging.c`: mutex-free structured log (INFO/WARN/ERROR/AUDIT)
+- [x] `storage.c`: binary save/load of students + accounts
+- [x] `backup.c`: timestamped backups, rotation to `MAX_BACKUPS`
+- [x] `logging.c`: mutex-free structured log (INFO/WARN/ERROR/AUDIT)
 
 ### 4. GTK4 UI
-- [ ] `main.c`: `GtkApplication`, activate → `ui_window`
-- [ ] `ui_window.c`: header bar + `GtkStackSwitcher` over the four views
-- [ ] `ui_login.c` + `ui_dialogs.c`: auth dialog, shared prompt/confirm dialogs
-- [ ] `ui_dashboard.c`: totals + service status readouts
-- [ ] `ui_students.c`: `GtkColumnView` table, add/edit/delete/search dialogs
-- [ ] `ui_accounts.c`: accounts view, deposit/withdraw dialogs
-- [ ] Wire sessions: department access gates write ops; PIN gates transactions.
+- [x] `main.c`: `GtkApplication`, activate → `ui_window`
+- [x] `ui_window.c`: header bar + `GtkStackSwitcher` over the four views
+- [x] `ui_login.c` + `ui_dialogs.c`: auth dialog, shared prompt/confirm dialogs
+- [x] `ui_dashboard.c`: totals + service status readouts
+- [x] `ui_students.c`: `GtkColumnView` table, add/edit/delete/search dialogs
+- [x] `ui_accounts.c`: accounts view, deposit/withdraw dialogs
+- [x] Wire sessions: department access gates write ops; PIN gates transactions.
 
 ### 5. Verify & ship
-- [ ] `cmake -B build && cmake --build build` clean, zero `-Wall -Wextra`
+- [x] `cmake -B build && cmake --build build` clean, zero `-Wall -Wextra`
       warnings
-- [ ] `ctest --test-dir build --output-on-failure` all green
-- [ ] `wc -l` <= 120 on every source file
-- [ ] Launch `./build/student_bank` on `:0`, smoke-test login + one
+- [x] `ctest --test-dir build --output-on-failure` all green
+- [x] `wc -l` <= 120 on every source file
+- [x] Launch `./build/student_bank` on `:0`, smoke-test login + one
       transaction + one student edit
 
 ## Open items
 
-- Final project/binary name (`student_bank` here — rename if desired).
-- Whether `notes` means free-text study notes or a funded account note; the
-  account type exists regardless, so this stays flexible.
+- [x] Final project/binary name (`student_bank` here — confirmed by user).
+- [ ] Whether `notes` means free-text study notes or a funded account note; the
+      account type exists regardless, so this stays flexible.

@@ -38,14 +38,19 @@ via the Wayland session on `:0`. `gh` is authenticated to `Je0Dev`.
   `logging.c`.
 - `src/ui/` - GTK4 layer: `main.c` (GtkApplication), `ui_window.c`
   (header bar + GtkStack), `ui_models.c` (GObject row types for
-  GtkColumnView), `ui_dialogs.c`, `ui_login.c`, `ui_dashboard.c`,
-  `ui_students.c`, `ui_accounts.c`.
+  GtkColumnView), `ui_dialogs.c` + `ui_alerts.c` (shared prompt/confirm/
+  error dialogs), `ui_login.c`, `ui_dashboard.c`, `ui_students.c`
+  (+ `ui_student_actions.c`, `ui_student_edit_delete.c`),
+  `ui_accounts.c` (+ `ui_account_actions.c`, `ui_account_add_delete.c`).
 - Global state: `g_students` (head of student list), `g_session` (auth).
 
 ## Gotchas
 
 - GTK4 `GtkColumnView` needs a `GListStore` of GObjects plus a
   `GtkSingleSelection`; row GObjects live in `ui_models.c`.
+- `GtkStack` pages must be added with `gtk_stack_add_titled()`. Pages added
+  with `gtk_stack_add_named()` have no title, so `GtkStackSwitcher` hides
+  their tab buttons (they stay invisible).
 - The test target compiles only pure modules (`src/core/*.c` + `logging.c`);
   it must never pull in GTK headers. Add any new pure module to both targets
   in `CMakeLists.txt`.
@@ -55,3 +60,8 @@ via the Wayland session on `:0`. `gh` is authenticated to `Je0Dev`.
   guards. Use e.g. `MAX_NAME`, not `NAME_H`.
 - Headers are included flat (`"student.h"`), not by relative path - the
   `include/` dir is on the include path via CMake.
+
+## References
+
+- [GTK4 documentation](https://www.gtk.org/docs/) - API reference, widgets,
+  and migration guides for the GUI layer.
